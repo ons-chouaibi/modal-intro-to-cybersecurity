@@ -1,21 +1,12 @@
-all: DHCP_starvation fake_DHCP
+all: dhcp starving web dns
 
-
-DHCP_starvation.o: DHCP_starvation.c
-	cc -c -Wall -g DHCP_starvation.c
-
-
-DHCP_starvation: DHCP_starvation.o
-	cc -g -o DHCP_starvation DHCP_starvation.o
-
-
-fake_DHCP.o: fake_DHCP.c
-	cc -c -Wall -g fake_DHCP.c
-
-fake_DHCP: fake_DHCP.o
-	cc -g -o fake_DHCP fake_DHCP.o
-
-
+dhcp: dhcp.c
+	gcc -Wall -o dhcp dhcp.c
+starving: starving.c
+	gcc -Wall -o starving starving.c
+dns: dns.c
+	gcc -Wall -o dns dns.c
+web: web.c
+	gcc -Wall -o web web.c -lpthread
 clean:
-	rm DHCP_starvation.o DHCP_starvation
-	rm fake_DHCP.o fake_DHCP
+	rm -f starving dhcp dns web

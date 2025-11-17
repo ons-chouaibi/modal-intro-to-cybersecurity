@@ -29,9 +29,7 @@ void makeoffer(dhcp_pack * offer, dhcp_pack* Discover)
     *opt++=2;
     *opt++=54;
     *opt++=4;
-    memcpy(opt,&(offer->siaddr.s_addr),4);//change this once you have the real ip adress to change
-    // and also the shit in dhcp.h cause
-    // I really can't be bothere to look for it right now
+    memcpy(opt,&(offer->siaddr.s_addr),4);
     opt+=4; 
     *opt++=51;
     *opt++=4;
@@ -44,18 +42,14 @@ void makeoffer(dhcp_pack * offer, dhcp_pack* Discover)
     *opt++=255;
     *opt++=255;
     *opt++=0;
-    //check this one to because again
-    // I really cant be fucking bothered 
+    
     
     
     *opt++=3;
     *opt++=4;
-//that too by the way make sure it is the right one or it won't work 
-    //and it will start bitching 
-   
+
     memcpy(opt,&(offer->siaddr),4);
     opt+=4;
-//change it to the good DNS okay thank you veru much 
     *opt++=6;
     *opt++=4;
     memcpy(opt,&(offer->siaddr),4);
@@ -123,17 +117,17 @@ int main(void)
 
     if ( setsockopt(mysocket,SOL_SOCKET,SO_BROADCAST,&yes,sizeof(yes))<0)
     {
-        printf("error with the broad cast thing\n ");
+        printf("error with the broadcast\n ");
         return -1;
     }
     if ( setsockopt(mysocket,SOL_SOCKET,SO_REUSEADDR,&yes,sizeof(yes))<0)
     {
-        printf(" please work \n");
+        printf(" socket error \n");
         return -1;
     }
     if(bind(mysocket,(struct sockaddr *)&servsock,some)<0)
     {
-        printf("the binding is bitching \n");
+        printf("bind error \n");
         return -1;
     }
     struct sockaddr_in serv;
@@ -150,7 +144,7 @@ int main(void)
         dhcp_pack * offer=malloc(sizeof(dhcp_pack));
         if(recvfrom(mysocket,discover,sizeof(dhcp_pack),0,(struct sockaddr *)&from,&some)<0)
         {
-            printf("receiving is on some crazy shit ! \n");
+            printf("receive error \n");
             return  -1 ;
         }
         if(discover->options[2]==1)
@@ -164,7 +158,7 @@ int main(void)
         makeoffer(offer,discover);
         if(sendto(mysocket,offer,sizeof(dhcp_pack),0,(struct sockaddr *)&serv,sizeof(serv))<0)
         {
-            printf("wassup with this shit the sending is just making me wanna end my life \n");
+            printf("send error \n");
             return -1;
         }
         }
@@ -173,7 +167,7 @@ int main(void)
             dhcp_ack(discover,offer);
             if(sendto(mysocket,offer,sizeof(dhcp_pack),0,(struct sockaddr *)&serv,sizeof(serv))<0)
             {
-                printf("wassup with this shit the sending is just making me wanna end my life \n");
+                printf("send error \n");
                 return -1;
             }
         }

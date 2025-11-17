@@ -2,8 +2,8 @@
 
 
 
-#define CLIENTIP "172.20.10.100"
-#define MYIP  "172.20.10.3"
+#define CLIENTIP "192.168.192.55"
+#define MYIP  "192.168.192.189"
 
 
 
