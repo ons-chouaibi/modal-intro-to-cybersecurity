@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "message.h": "c",
+        "stdlib.h": "c",
+        "pthread.h": "c"
+    }
+}

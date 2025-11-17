@@ -1,0 +1,10 @@
+FROM ubuntu:20.04
+
+# Install required packages
+RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
+    --fix-missing gcc build-essential iproute2 net-tools iptables curl isc-dhcp-client
+
+# Set working directory
+WORKDIR /mnt
+
+CMD ["/bin/bash"]

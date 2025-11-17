@@ -1,0 +1,14 @@
+This is a C programming language for different version of Hello_World, the excution needs a C compiler.
+## Projects
+
+1. hello-world: A simple "Hello, World!" program.
+2. international-hello-world: Prints "Hello, World!" in different languages using preprocessor directives.
+3. fancy-hello-world: Takes user input and generates a personalized greeting.
+
+## How to use:
+To compile all Projects, use the command make
+To compile a certain project, use the command make Name_of_the_project
+To delete generated files, use the command make clean
+to excute a project, use the command ./Name_of_the_project
+
+PS: To change the language of international_hello_world, change the LANGUAGE variable in the Makefile
